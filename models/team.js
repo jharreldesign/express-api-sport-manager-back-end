@@ -18,9 +18,13 @@ const playerSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+        manager: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+        },
     },
     { timestamps: true }
-)
+);
 
 const teamSchema = new mongoose.Schema(
     {
@@ -44,9 +48,9 @@ const teamSchema = new mongoose.Schema(
         manager: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
-            required: true
-        },  // This links the team to the user who is managing it
-        players: [playerSchema],  // The players that belong to the team
+            required: true,
+        },
+        players: [playerSchema], // The players that belong to the team
     },
     { timestamps: true }
 );
@@ -54,3 +58,4 @@ const teamSchema = new mongoose.Schema(
 const Team = mongoose.model('Team', teamSchema);
 
 module.exports = Team;
+
